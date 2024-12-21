@@ -8,7 +8,7 @@ import java.util.*;
 public class TxtReader {
     public static List<Map<String,String>> studentData = new ArrayList<>();
 
-    public static void ReadTxt(String txtPath) throws IOException {
+    public static void ReadTxt(String txtPath) {
         try {
             FileReader fileReader = new FileReader(txtPath);
             BufferedReader reader = new BufferedReader(fileReader);
@@ -26,7 +26,7 @@ public class TxtReader {
             for (int i = 0; i < headers.length; i++) {
                 headerMap.put(headers[i], i);
             }
-            System.out.println(headerMap.toString());
+            System.out.println(headerMap);
 
             // 读取后续行数据
             String line;
@@ -34,6 +34,9 @@ public class TxtReader {
 
                 // 分割每行的数据
                 String[] values = line.split("\\s+");
+                if(values[0].isEmpty()){
+                    break;
+                }
 
                 Map<String, String> subMap = new LinkedHashMap<>(); //每一个学生
                 //for each遍历字典
